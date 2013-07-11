@@ -28,11 +28,25 @@
         {
             var result = new List<T>();
 
-            foreach (var type in this.catalogue.GetAvailableTypes().Where(x => typeof(T).IsAssignableFrom(x)))
+            foreach (var type in this.catalogue.GetAvailableTypes())
             {
+                var isTAssignableFromType = false;
                 try
                 {
-                    result.Add((T)Activator.CreateInstance(type));
+                    isTAssignableFromType = typeof(T).IsAssignableFrom(type);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("InstantiateAllOfType IsAssignableFrom error. T: {0}, type: {1}.", typeof(T).FullName, type.FullName);
+                    System.Diagnostics.Debug.WriteLine(ex);
+                }
+
+                try
+                {
+                    if (isTAssignableFromType)
+                    {
+                        result.Add((T)Activator.CreateInstance(type));
+                    }
                 }
                 catch
                 {
