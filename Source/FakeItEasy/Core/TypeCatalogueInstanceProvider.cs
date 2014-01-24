@@ -37,7 +37,7 @@
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("InstantiateAllOfType IsAssignableFrom error. T: {0}, type: {1}.", typeof(T).FullName, type.FullName);
+                    System.Diagnostics.Debug.WriteLine(string.Format("InstantiateAllOfType IsAssignableFrom error. T: {0}, type: {1}.", typeof(T).FullName, type.FullName));
                     System.Diagnostics.Debug.WriteLine(ex);
                 }
 
